@@ -34,10 +34,12 @@ class Coke implements IceDrink {
 
 }
 
+// Classe abstrata ou Interface que define o contrato do AbstractFactory
 interface DrinkFactory {
 	IceDrink prepare(int qnt);
 }
 
+// Implementação 1 do contrato da interface o classe abstrata relativa ao AbastractFactory
 class JuiceFactory implements DrinkFactory {
 
 	@Override
@@ -56,6 +58,7 @@ class JuiceFactory implements DrinkFactory {
 
 }
 
+//Implementação 2 do contrato da interface o classe abstrata relativa ao AbastractFactory
 class CokeFactory implements DrinkFactory {
 
 	@Override
@@ -74,6 +77,7 @@ class CokeFactory implements DrinkFactory {
 
 }
 
+// AbstractFactory. Realiza a criação do objeto independente da implementação
 class MachineDrinkFactory {
 
 	public enum Drinks {
