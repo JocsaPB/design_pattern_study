@@ -166,40 +166,39 @@ class HtmlBuilder {
 	
 }
 
-class CodeBuilder
-{
+class CodeBuilder {
+	
 	private String className;
-    private Map<String, String> fieldsMap = new HashMap<>();
-    private final String newLine = System.lineSeparator();
-    
-    public CodeBuilder(String className)
-    {
-        this.className = className;
-    }
-    
-    public CodeBuilder addField(String name, String type)
-    {
-        fieldsMap.put(name, type);
-        return this;
-    }
-    
-    @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append("public class " + this.className + newLine);
-        sb.append("{" + newLine);
-        
-    	for (Map.Entry<String, String> item : fieldsMap.entrySet()) {
-			sb.append("  public " + item.getValue() + " " + item.getKey() +";" + newLine);
-		}
-    	
-        sb.append("}");
-        
-        return sb.toString();
-    }
-}
+	private Map<String, String> fieldsMap = new HashMap<>();
+	private final String newLine = System.lineSeparator();
 
+	public CodeBuilder(String className) {
+		this.className = className;
+	}
+
+	public CodeBuilder addField(String name, String type) {
+		fieldsMap.put(name, type);
+		return this;
+	}
+
+	public String build() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("public class " + this.className + newLine);
+		sb.append("{" + newLine);
+
+		for (Map.Entry<String, String> item : fieldsMap.entrySet()) {
+			sb.append("  public " + item.getValue() + " " + item.getKey() + ";" + newLine);
+		}
+
+		sb.append("}");
+		return sb.toString();
+	}
+
+	@Override public String toString() {
+
+		return build();
+	}
+}
 
 
 
