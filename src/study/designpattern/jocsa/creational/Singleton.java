@@ -1,5 +1,7 @@
 package study.designpattern.jocsa.creational;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 public class Singleton {
 
 	public static void main(String[] args) {
@@ -10,9 +12,13 @@ public class Singleton {
 		
 		BasicSingleton singletonTwo = BasicSingleton.getInstance();
 		
-		System.out.println("Print the singleton value, withou setting value: " + singletonTwo.getValue());
+		System.out.println("\nPrint the singleton value, withou setting value: " + singletonTwo.getValue());
 		System.out.println("singletonOne is equal singletonTwo: " + (singletonOne == singletonTwo));
-	
+		
+		EnumBasicSingleton enumBasic = EnumBasicSingleton.INSTANCE;
+		enumBasic.setValue(15);
+		EnumBasicSingleton enumClone = SerializationUtils.roundtrip(enumBasic);
+		System.out.println("\nOriginal value = 1; Value of enumClone: " + enumClone.getValue());
 	}
 	
 }
@@ -86,6 +92,39 @@ class SingletonThreadSafe {
 	
 }
 
+enum EnumBasicSingleton {
+	
+	INSTANCE;
+	
+	private int value;
 
+	EnumBasicSingleton() {
+		this.value = 1;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+	
+}
+
+class MonostateSingleton {
+	
+	// Não importa quantas instâncias sejam da classe, o valor sempre será o mesmo
+	private static int value;
+
+	public static int getValue() {
+		return value;
+	}
+
+	public static void setValue(int value) {
+		MonostateSingleton.value = value;
+	}
+	
+}
 
 
